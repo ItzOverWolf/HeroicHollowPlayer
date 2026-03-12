@@ -1,0 +1,129 @@
+# HollowPlayer Configuration
+
+# Worlds where abilities and recipes are allowed
+# If empty, allowed in all worlds
+whitelisted-worlds: []
+
+# Worlds where abilities are strictly disabled
+blacklisted-worlds:
+  - "creative_world"
+
+# Announcement settings
+announcements:
+  enabled: true
+  abilities:
+    abyss_shriek: true
+    shade_soul: true
+    descending_dark: true
+    monarch_wings: true
+    shade_cloak: true
+
+# Geo System
+geo:
+  enabled: true
+  drop-chance: 0.5 # 50% chance to drop Geo on kill
+  min-drop: 1
+  max-drop: 5
+  # Note: Geo is now a physical item (Prismarine Crystal).
+  # You can use 'PRISMARINE_CRYSTAL' in recipes below to represent Geo.
+
+# Messages & Titles
+messages:
+  prefix: "§6§lHollowPlayer §8» "
+  not-enough-soul: "§cNot enough soul (hunger)!"
+  already-unlocked: "§cYou have already unlocked this ability!"
+  unlock-chat: "§7You have unlocked {ability}§7!"
+  unlock-description: "§8» §f{description}"
+  announcement: "§e{player} has unlocked §b§l{ability}§e!"
+
+titles:
+  unlock-main: "§6§lABILITY UNLOCKED"
+  unlock-sub: "§b{ability}"
+
+# Firework settings for unlocking
+unlock-firework:
+  enabled: true
+  color: "AQUA"
+  fade: "WHITE"
+  type: "BALL_LARGE"
+  power: 1
+
+# Ability Settings
+abilities:
+  abyss_shriek:
+    name: "Abyss Shriek"
+    description: "Shift + Look Up to blast foes with souls from below."
+    material: GHAST_TEAR
+    cost: 6
+    damage: 24.0
+  shade_soul:
+    name: "Shade Soul"
+    description: "Shift to fire a powerful projectile of shadow."
+    material: NETHER_STAR
+    cost: 4
+    damage: 16.0
+  descending_dark:
+    name: "Descending Dark"
+    description: "Shift + Look Down to dive and cause a shockwave."
+    material: OBSIDIAN
+    cost: 8
+    damage: 30.0
+  monarch_wings:
+    name: "Monarch Wings"
+    description: "Jump mid-air to flap your wings again."
+    material: FEATHER
+    cost: 1
+  shade_cloak:
+    name: "Shade Cloak"
+    description: "Permanent Speed II."
+    material: SQUID_INK
+
+# Crafting Recipes
+# Use standard Bukkit Material names.
+recipes:
+  shade_soul:
+    enabled: true
+    shape:
+      - "EGE"
+      - "GSG"
+      - "EGE"
+    ingredients:
+      E: ENDER_EYE
+      G: PRISMARINE_CRYSTAL
+      S: NETHERITE_INGOT
+  abyss_shriek:
+    enabled: true
+    shape:
+      - " G "
+      - "GDG"
+      - " G "
+    ingredients:
+      G: PRISMARINE_CRYSTAL
+      D: DRAGON_BREATH
+  descending_dark:
+    enabled: true
+    shape:
+      - "OOO"
+      - "OGO"
+      - "OOO"
+    ingredients:
+      O: OBSIDIAN
+      G: PRISMARINE_CRYSTAL
+  monarch_wings:
+    enabled: true
+    shape:
+      - " G "
+      - "GEG"
+      - " G "
+    ingredients:
+      G: PRISMARINE_CRYSTAL
+      E: ELYTRA
+  shade_cloak:
+    enabled: true
+    shape:
+      - "GGG"
+      - "GIG"
+      - "GGG"
+    ingredients:
+      G: PRISMARINE_CRYSTAL
+      I: IRON_BLOCK
