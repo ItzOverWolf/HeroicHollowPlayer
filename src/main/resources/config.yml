@@ -24,8 +24,8 @@ geo:
   drop-chance: 0.5 # 50% chance to drop Geo on kill
   min-drop: 1
   max-drop: 5
-  # Note: Geo is now a physical item (Prismarine Crystal).
-  # You can use 'PRISMARINE_CRYSTAL' in recipes below to represent Geo.
+  # Note: Geo is now a physical item (Prismarine Crystals).
+  # You can use 'PRISMARINE_CRYSTALS' in recipes below to represent Geo.
 
 # Messages & Titles
 messages:
@@ -89,7 +89,7 @@ recipes:
       - "EGE"
     ingredients:
       E: ENDER_EYE
-      G: PRISMARINE_CRYSTAL
+      G: PRISMARINE_CRYSTALS
       S: NETHERITE_INGOT
   abyss_shriek:
     enabled: true
@@ -98,7 +98,7 @@ recipes:
       - "GDG"
       - " G "
     ingredients:
-      G: PRISMARINE_CRYSTAL
+      G: PRISMARINE_CRYSTALS
       D: DRAGON_BREATH
   descending_dark:
     enabled: true
@@ -108,7 +108,7 @@ recipes:
       - "OOO"
     ingredients:
       O: OBSIDIAN
-      G: PRISMARINE_CRYSTAL
+      G: PRISMARINE_CRYSTALS
   monarch_wings:
     enabled: true
     shape:
@@ -116,7 +116,7 @@ recipes:
       - "GEG"
       - " G "
     ingredients:
-      G: PRISMARINE_CRYSTAL
+      G: PRISMARINE_CRYSTALS
       E: ELYTRA
   shade_cloak:
     enabled: true
@@ -125,5 +125,5 @@ recipes:
       - "GIG"
       - "GGG"
     ingredients:
-      G: PRISMARINE_CRYSTAL
+      G: PRISMARINE_CRYSTALS
       I: IRON_BLOCK

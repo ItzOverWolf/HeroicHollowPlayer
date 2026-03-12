@@ -2,6 +2,7 @@ package me.heroicstudios.hollowplayer.listeners;
 
 import me.heroicstudios.hollowplayer.Ability;
 import me.heroicstudios.hollowplayer.HollowPlayer;
+import me.heroicstudios.hollowplayer.RecipeManager;
 import me.heroicstudios.hollowplayer.abilities.*;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -33,6 +34,17 @@ public class PlayerListener implements Listener {
 
     public PlayerListener(HollowPlayer plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        RecipeManager.discoverRecipes(player);
+        
+        // Initial application of Shade Cloak if unlocked
+        if (plugin.isUnlocked(player, Ability.SHADE_CLOAK)) {
+            player.addPotionEffect(new org.bukkit.potion.PotionEffect(org.bukkit.potion.PotionEffectType.SPEED, 40, 1, false, false, false));
+        }
     }
 
     private boolean isWorldDisabled(Player player) {

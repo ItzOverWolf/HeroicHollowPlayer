@@ -4,16 +4,21 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ShapedRecipe;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class RecipeManager {
+
+    private static final List<NamespacedKey> recipeKeys = new ArrayList<>();
 
     public static void registerRecipes(HollowPlayer plugin) {
         ConfigurationSection recipesSection = plugin.getConfig().getConfigurationSection("recipes");
         if (recipesSection == null) return;
+
+        recipeKeys.clear();
 
         for (String key : recipesSection.getKeys(false)) {
             ConfigurationSection section = recipesSection.getConfigurationSection(key);
@@ -50,6 +55,13 @@ public class RecipeManager {
             }
 
             Bukkit.addRecipe(recipe);
+            recipeKeys.add(recipeKey);
+        }
+    }
+
+    public static void discoverRecipes(Player player) {
+        for (NamespacedKey key : recipeKeys) {
+            player.discoverRecipe(key);
         }
     }
 }

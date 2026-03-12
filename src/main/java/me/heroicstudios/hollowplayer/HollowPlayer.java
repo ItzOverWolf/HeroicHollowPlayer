@@ -69,6 +69,18 @@ public final class HollowPlayer extends JavaPlugin {
         }
     }
 
+    public void removeAbility(Player player, Ability ability) {
+        String unlocked = player.getPersistentDataContainer().get(abilityKey, org.bukkit.persistence.PersistentDataType.STRING);
+        if (unlocked != null && unlocked.contains(ability.getId())) {
+            unlocked = unlocked.replace("," + ability.getId(), "").replace(ability.getId(), "");
+            player.getPersistentDataContainer().set(abilityKey, org.bukkit.persistence.PersistentDataType.STRING, unlocked);
+        }
+    }
+
+    public void removeAllAbilities(Player player) {
+        player.getPersistentDataContainer().remove(abilityKey);
+    }
+
     private class HPCommand implements CommandExecutor, TabCompleter {
         @Override
         public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -76,6 +88,7 @@ public final class HollowPlayer extends JavaPlugin {
                 sender.sendMessage("§6§lHollowPlayer Commands:");
                 sender.sendMessage("§e/hp give <player> <ability> §7- Give an ability item");
                 sender.sendMessage("§e/hp give <player> geo <amount> §7- Give physical Geo");
+                sender.sendMessage("§e/hp remove <player> <ability|all> §7- Remove abilities");
                 sender.sendMessage("§e/hp reload §7- Reload config and recipes");
                 return true;
             }
@@ -88,6 +101,37 @@ public final class HollowPlayer extends JavaPlugin {
                 reloadConfig();
                 RecipeManager.registerRecipes(HollowPlayer.this);
                 sender.sendMessage("§aHollowPlayer config and recipes reloaded!");
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("remove")) {
+                if (!sender.hasPermission("hollowplayer.admin")) {
+                    sender.sendMessage("§cNo permission.");
+                    return true;
+                }
+                if (args.length < 3) {
+                    sender.sendMessage("§cUsage: /hp remove <player> <ability|all>");
+                    return true;
+                }
+                Player target = Bukkit.getPlayer(args[1]);
+                if (target == null) {
+                    sender.sendMessage("§cPlayer not found.");
+                    return true;
+                }
+
+                if (args[2].equalsIgnoreCase("all")) {
+                    removeAllAbilities(target);
+                    sender.sendMessage("§aRemoved all abilities from " + target.getName());
+                    return true;
+                }
+
+                Ability ability = Ability.fromId(args[2]);
+                if (ability == null) {
+                    sender.sendMessage("§cAbility not found.");
+                    return true;
+                }
+                removeAbility(target, ability);
+                sender.sendMessage("§aRemoved " + ability.getName(HollowPlayer.this) + " from " + target.getName());
                 return true;
             }
 
@@ -140,11 +184,17 @@ public final class HollowPlayer extends JavaPlugin {
             List<String> completions = new ArrayList<>();
             if (args.length == 1) {
                 completions.add("give");
+                completions.add("remove");
                 completions.add("reload");
-            } else if (args.length == 2 && args[0].equalsIgnoreCase("give")) {
+            } else if (args.length == 2 && (args[0].equalsIgnoreCase("give") || args[0].equalsIgnoreCase("remove"))) {
                 return null; // Bukkit handles player names automatically
             } else if (args.length == 3 && args[0].equalsIgnoreCase("give")) {
                 completions.add("geo");
+                for (Ability ability : Ability.values()) {
+                    completions.add(ability.getId());
+                }
+            } else if (args.length == 3 && args[0].equalsIgnoreCase("remove")) {
+                completions.add("all");
                 for (Ability ability : Ability.values()) {
                     completions.add(ability.getId());
                 }
