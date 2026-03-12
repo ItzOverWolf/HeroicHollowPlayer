@@ -27,7 +27,7 @@ public class MonarchWings {
         
         Location loc = player.getLocation();
         player.getWorld().playSound(loc, Sound.ENTITY_ENDER_DRAGON_FLAP, 1.0f, 1.2f);
-        player.getWorld().spawnParticle(Particle.WHITE_SMOKE, loc, 20, 0.2, 0.1, 0.2, 0.05);
+        player.getWorld().spawnParticle(Particle.SMOKE_LARGE, loc, 20, 0.2, 0.1, 0.2, 0.05);
         player.getWorld().spawnParticle(Particle.CLOUD, loc, 10, 0.5, 0.1, 0.5, 0.05);
     }
 }

@@ -127,7 +127,7 @@ public final class HollowPlayer extends JavaPlugin {
                     return true;
                 }
                 target.getInventory().addItem(ability.getItem(HollowPlayer.this));
-                sender.sendMessage("§aGave " + ability.getName() + " §ato " + target.getName());
+                sender.sendMessage("§aGave " + ability.getName(HollowPlayer.this) + " §ato " + target.getName());
                 return true;
             }
 

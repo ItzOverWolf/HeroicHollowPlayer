@@ -78,6 +78,29 @@ public class PlayerListener implements Listener {
         }
     }
 
+    private Color parseColor(String name) {
+        if (name == null) return Color.WHITE;
+        switch (name.toUpperCase()) {
+            case "AQUA": return Color.AQUA;
+            case "BLACK": return Color.BLACK;
+            case "BLUE": return Color.BLUE;
+            case "FUCHSIA": return Color.FUCHSIA;
+            case "GRAY": return Color.GRAY;
+            case "GREEN": return Color.GREEN;
+            case "LIME": return Color.LIME;
+            case "MAROON": return Color.MAROON;
+            case "NAVY": return Color.NAVY;
+            case "OLIVE": return Color.OLIVE;
+            case "ORANGE": return Color.ORANGE;
+            case "PURPLE": return Color.PURPLE;
+            case "RED": return Color.RED;
+            case "SILVER": return Color.SILVER;
+            case "TEAL": return Color.TEAL;
+            case "YELLOW": return Color.YELLOW;
+            default: return Color.WHITE;
+        }
+    }
+
     private void unlockAbility(Player player, Ability ability) {
         plugin.unlock(player, ability);
 
@@ -87,8 +110,8 @@ public class PlayerListener implements Listener {
             Firework fw = player.getWorld().spawn(player.getLocation(), Firework.class);
             FireworkMeta meta = fw.getFireworkMeta();
             try {
-                Color color = Color.valueOf(fwSection.getString("color", "AQUA"));
-                Color fade = Color.valueOf(fwSection.getString("fade", "WHITE"));
+                Color color = parseColor(fwSection.getString("color", "AQUA"));
+                Color fade = parseColor(fwSection.getString("fade", "WHITE"));
                 FireworkEffect.Type type = FireworkEffect.Type.valueOf(fwSection.getString("type", "BALL_LARGE"));
                 meta.addEffect(FireworkEffect.builder().withColor(color).withFade(fade).with(type).build());
                 meta.setPower(fwSection.getInt("power", 1));
