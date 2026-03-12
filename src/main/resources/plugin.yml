@@ -1,0 +1,14 @@
+name: HollowPlayer
+version: '${project.version}'
+main: me.heroicstudios.hollowplayer.HollowPlayer
+api-version: '1.18'
+commands:
+  hollowplayer:
+    aliases: [hp]
+    description: Main command for HollowPlayer
+    permission: hollowplayer.use
+permissions:
+  hollowplayer.use:
+    default: true
+  hollowplayer.admin:
+    default: op
